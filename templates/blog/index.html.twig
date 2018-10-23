@@ -1,0 +1,68 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Blog Posts{% endblock %}
+
+{% block body %}
+  <div class="blog-cols-header">
+    <div class="container">
+      <h1>
+        Get the latest thoughts & news
+      </h1>
+      <p>
+        Envie de partager? Ecrivez votre articles <a href="{{ path('admin_blog_post_create') }}" >ici</a>.
+      </p>
+    </div>
+  </div>
+
+  <div class="blog-posts-list">
+    <div class="container">
+        
+    {% for blogPost in blogPosts %}
+      <div class="row">
+        <div class="col-12">
+          <div class="post">
+            <a href="{{ path('post', {'slug': blogPost.slug}) }}" class="title">{{ blogPost.title }}</a>
+            <div class="author">
+              <img src="https://lh5.googleusercontent.com/-TIrH5Z96j2w/AAAAAAAAAAI/AAAAAAAABVU/Yj1HRa8F4tA/photo.jpg" class="avatar">
+              By {% if blogPost.author %}
+                    <a href="{{ path('author', {'name': blogPost.author.username|url_encode }) }}">
+                        {{ blogPost.author.name }}
+                    </a>
+                {% else %}
+                    Unknown Author
+                {% endif %}
+            </div>
+            <a href="{{ path('post', {'slug': blogPost.slug}) }}" class="bg" style="background-image:url('/uploads/{{ blogPost.filename }}');">
+            </a>
+            <div class="description">
+              {{ blogPost.description }}
+            </div>
+            <a href="{{ path('post', {'slug': blogPost.slug}) }}" class="read-more">
+              Read more
+              <i class="ion-chevron-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+
+    </div>
+  </div>
+
+    {% set canPrevious = page > 1 %}
+    {% set canNext = (page * entryLimit) < totalBlogPosts %}
+      <nav class="blog-pager">
+        <ul class="pagination justify-content-center">
+            <li class="previous {% if canPrevious == false %}disabled{% endif %} page-item">
+                <a href="{% if canPrevious %}{{ path('blog', {'page': page - 1}) }}{% endif %}" class="page-link">
+                    <span aria-hidden="true">&larr;</span> Older
+                </a>
+            </li>
+            <li class="next {% if canNext == false %}disabled{% endif %} page-item">
+                <a href="{% if canNext %}{{ path('blog', {'page': page + 1}) }}{% endif %}" class="page-link">
+                    Newer <span aria-hidden="true">&rarr;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+{% endblock %}

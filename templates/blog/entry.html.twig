@@ -1,0 +1,37 @@
+{% extends "base.html.twig" %}
+
+{% block title %}App:blog:entry{% endblock %}
+
+{% block body %}
+  <div class="blog-post">
+    <div class="container">
+      <h3 class="blog-post-title">
+        {{ blogPost.title }}
+      </h3>
+      <div class="blog-post-header">
+        <div class="blog-post-author">
+          <img src="https://lh5.googleusercontent.com/-TIrH5Z96j2w/AAAAAAAAAAI/AAAAAAAABVU/Yj1HRa8F4tA/photo.jpg">
+          By <span><a href="{{ path('author', {'name': blogPost.author.username|url_encode }) }}">
+                            {{ blogPost.author.name }}
+                        </a>
+                        </span>
+        </div>
+        <div class="blog-post-date">
+          Date <span>{{ blogPost.updatedAt|date('j/m/Y') }}</span>
+        </div>
+        <div class="blog-post-share">
+          Share this post: 
+          <a href="#">
+            <i class="fab fa-twitter ion-social-twitter"></i>
+          </a>
+          <a href="#">
+            <i class="fab fa-facebook-f ion-social-facebook"></i>
+          </a>
+        </div>
+      </div>
+        <div class="blog-post-content">
+            <p>{{ blogPost.body|raw }}</p>
+        </div>
+    </div>
+    </div>
+{% endblock %}

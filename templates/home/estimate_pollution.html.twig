@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  <div class="index-features" data-scroll>
+    <div class="container">
+      <header>
+        <h3>Estimez vos émissions de Gaz à effet de serre!</h3>
+        <p>
+          Cette page a pour but
+        </p>
+      </header>
+      <section class="features">
+    <div class="row">
+        <div class="col-sm">
+            <select id="car">
+                <option value="112">Twingo</option>
+                <option value="230">Porshe cayenne</option>
+            </select>
+        </div>
+        <div class="col-sm">
+            <input id="slider-co2" type="range" class="slider" min="0" max="250" >
+            <span id="number-co2"></span>g CO2/km
+        </div>
+        <div class="col-sm">
+            <input id="slider-km" type="range" class="slider" min="0" max="30000" value="10000" >
+            <span id="number-km"></span>km/an
+        </div>
+        <div class="col-sm">
+            Soit <span id="number-kg-co2-year"></span>Kg CO2/an ou encore l'equivalent a la consomation de <span id="number-tree"></span>
+            <i class="fas fa-tree"></i>/an
+            <div class="icons-trees">
+            </div>
+        </div>
+    </div>
+    </section>
+    </div>
+  </div>
+{% endblock %}
